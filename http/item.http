@@ -1,0 +1,15 @@
+### Create
+POST http://localhost:4242/items
+content-type: application/json
+
+{
+    "name": "Avengers",
+    "price": 40,
+    "quantity": 100
+}
+
+### Find All
+GET http://localhost:4242/items
+
+### Find One
+GET http://localhost:4242/items/a2e0f753-416f-4cc8-b516-33b153705354
