@@ -3,6 +3,8 @@ import { makeItemRepositoryFactory } from '../../infra/factories/item-repository
 import { CreateItemUseCase } from '../../use-case/create-item.use.case'
 import { FindAllItemUseCase } from '../../use-case/find-all-item.use.case'
 import { FindOneItemUseCase } from '../../use-case/find-one-item.use.case'
+import { UpdateItemUseCase } from '../../use-case/update-item.use.case'
+import { DeleteItemUseCase } from '../../use-case/delete-item.use.case'
 
 export class ItemController {
   async create(req: Request, res: Response) {
@@ -51,7 +53,31 @@ export class ItemController {
     const { id } = req.params
     const { name, price, quantity } = req.body
     const itemRepository = makeItemRepositoryFactory()
+    const updateItemUseCase = new UpdateItemUseCase(itemRepository)
 
-    res.json('updateee')
+    const result = await updateItemUseCase.perform({
+      id,
+      name,
+      price,
+      quantity,
+    })
+    if (result) {
+      res.status(200).send(result)
+    } else {
+      res.status(200).send({ error: true, message: 'Item can not updated' })
+    }
+  }
+
+  async destroy(req: Request, res: Response) {
+    const { id } = req.params
+    const itemRepository = makeItemRepositoryFactory()
+    const deleteItemUseCase = new DeleteItemUseCase(itemRepository)
+
+    const result = await deleteItemUseCase.perform(id)
+    if (result) {
+      res.status(200).send({ message: 'Item success deleted' })
+    } else {
+      res.status(200).send({ error: true, message: 'Item can not deleted' })
+    }
   }
 }
