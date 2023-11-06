@@ -4,13 +4,15 @@ import {
   FindAllRepository,
   FindOneRepository,
   UpdateRepository,
+  DeleteRepository,
 } from '../../../core/domain/repositories'
 
 export interface ItemRepository
   extends CreateRepository<ItemEntity>,
     FindAllRepository<ItemEntity>,
     FindOneRepository<ItemEntity>,
-    UpdateRepository<ItemEntity> {
+    UpdateRepository<ItemEntity>,
+    DeleteRepository {
   create(entity: ItemEntity): Promise<ItemEntity | false>
 
   findAll(): Promise<ItemEntity[] | false>
@@ -18,4 +20,6 @@ export interface ItemRepository
   findOne(id: string): Promise<ItemEntity | false>
 
   update(entity: ItemEntity, id: string): Promise<ItemEntity | false>
+
+  delete(id: string): Promise<boolean>
 }
