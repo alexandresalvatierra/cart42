@@ -6,7 +6,6 @@ export type FindOneItemResponse = {
   name: string
   price: number
   quantity: number
-  createdAt: Date
 }
 
 export class FindOneItemUseCase implements UseCase {
@@ -20,7 +19,6 @@ export class FindOneItemUseCase implements UseCase {
         name: itemEntity.props.name,
         price: itemEntity.props.price,
         quantity: itemEntity.props.quantity,
-        createdAt: itemEntity.props.createdAt,
       }
     } else {
       return false

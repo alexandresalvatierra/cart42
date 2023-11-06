@@ -13,7 +13,7 @@ export type CreateItemResponse = {
   name: string
   price: number
   quantity: number
-  createdAt: Date
+  createdAt?: Date
 }
 
 export class CreateItemUseCase implements UseCase {
