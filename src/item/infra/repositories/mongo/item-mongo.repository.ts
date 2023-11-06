@@ -10,6 +10,7 @@ export class ItemMongoRepository implements ItemRepository {
       price,
       quantity,
       created_at: createdAt,
+      updated_at: createdAt,
     })
       .then((item) => {
         const { id, name, price, quantity, created_at: createdAt } = item
@@ -39,7 +40,7 @@ export class ItemMongoRepository implements ItemRepository {
 
   async findOne(id: string): Promise<ItemEntity | false> {
     return await ItemModel.findOne({
-      id,
+      _id: id,
     })
       .then((item) =>
         ItemEntity.create(
@@ -55,8 +56,32 @@ export class ItemMongoRepository implements ItemRepository {
       .catch(() => false)
   }
 
-  update(itemEntity: ItemEntity, id: string): Promise<ItemEntity | false> {
-    const { name, price, quantity, createdAt } = itemEntity.props
-    throw new Error('Method not implemented.')
+  async update(
+    itemEntity: ItemEntity,
+    id: string,
+  ): Promise<ItemEntity | false> {
+    const { name, price, quantity, updatedAt } = itemEntity.props
+    return await ItemModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        name,
+        price,
+        quantity,
+        updated_at: updatedAt,
+      },
+      { upsert: false },
+    )
+      .then((item) =>
+        item
+          ? ItemEntity.create({ name, price, quantity, updatedAt }, id)
+          : false,
+      )
+      .catch(() => false)
+  }
+
+  async delete(id: string): Promise<boolean> {
+    return await ItemModel.findByIdAndDelete({ _id: id })
+      .then((item) => (item ? true : false))
+      .catch(() => false)
   }
 }
