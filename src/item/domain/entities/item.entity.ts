@@ -4,7 +4,8 @@ type ItemProps = {
   name: string
   price: number
   quantity: number
-  createdAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export class ItemEntity extends Entity<ItemProps> {
