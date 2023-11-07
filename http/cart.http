@@ -1,2 +1,31 @@
+### Create
 POST http://localhost:4242/carts
 content-type: application/json
+
+{
+  "items": [
+    {
+      "itemId": "6549651a9609d5b95b5b358a",
+      "price": 42,
+      "quantity": 2,
+      "discounts": 2,
+      "taxes": 5
+    },
+    {
+      "itemId": "6549651e9609d5b95b5b358c",
+      "price": 40,
+      "quantity": 1,
+      "discounts": 1,
+      "taxes": 5
+    }
+  ]
+}
+
+### Find All
+GET http://localhost:4242/carts
+
+### Find One
+GET http://localhost:4242/carts/654abb84b4262f8386f87d9d
+
+### Delete/Abandon
+DELETE http://localhost:4242/carts/654abb84b4262f8386f87d9d

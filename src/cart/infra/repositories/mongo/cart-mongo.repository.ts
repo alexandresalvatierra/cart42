@@ -1,6 +1,6 @@
 import { CartEntity } from '../../../domain/entities/cart.entity'
 import { CartRepository } from '../../../domain/repositories/cart.repository'
-import { CartModel } from '../../../../database/models/cart.model'
+import { CartModel } from '../../models/mongo/cart.model'
 import { CartItemEntity } from '../../../domain/entities/cart-item.entity'
 import mongoose from 'mongoose'
 
@@ -207,6 +207,18 @@ export class CartMongoRepository implements CartRepository {
           _id,
         )
       })
+      .catch(() => false)
+  }
+
+  async delete(id: string): Promise<boolean> {
+    return await CartModel.findByIdAndUpdate(
+      { _id: id },
+      {
+        abandonedAt: new Date(),
+      },
+      { upsert: false },
+    )
+      .then((cart) => (cart ? true : false))
       .catch(() => false)
   }
 }

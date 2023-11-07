@@ -33,22 +33,19 @@ export class CreateCartUseCase implements UseCase {
     request: CreateCartRequest,
   ): Promise<CreateCartResponse | false> {
     const { items } = request
-    const createdAt = new Date()
     const cartItemEntity = items.map((cartItem) => {
       const { itemId, quantity, discounts, taxes } = cartItem
-      const createdAt = new Date()
       return CartItemEntity.create({
         itemId,
         quantity,
         discounts,
         taxes,
-        createdAt,
       })
     })
     const cartEntity = CartEntity.create({
       items: cartItemEntity,
-      createdAt,
     })
+
     const cartEntityCreated = await this.cartRepository.create(cartEntity)
 
     if (cartEntityCreated) {
@@ -76,38 +73,6 @@ export class CreateCartUseCase implements UseCase {
         total,
         items: cartItemDto,
       }
-      /* const id = cartEntityCreated.id
-      const { items } = cartEntityCreated.props
-      let sumQuantity = 0
-      const sumSubtotal = 0
-      let sumDiscounts = 0
-      let sumTaxes = 0
-
-      const cartItemDto: CreateCartItemDto[] = items.map((cartItem) => {
-        const { itemId, quantity, discounts, taxes, createdAt } = cartItem.props
-        sumQuantity = sumQuantity + quantity
-        //sumSubtotal = sumSubtotal + quantity * price
-        sumDiscounts = sumDiscounts + discounts
-        sumTaxes = sumTaxes + taxes
-        return {
-          itemId,
-          quantity,
-          discounts,
-          taxes,
-          createdAt,
-        }
-      })
-
-      return {
-        id,
-        quantity: sumQuantity,
-        subtotal: sumSubtotal,
-        discounts: sumDiscounts,
-        taxes: sumTaxes,
-        total: sumSubtotal - sumDiscounts + sumTaxes,
-        items: cartItemDto,
-        createdAt,
-      } */
     } else {
       return false
     }

@@ -4,6 +4,7 @@ import {
   CreateCartUseCase,
   FindAllCartUseCase,
   FindOneCartUseCase,
+  DeleteCartUseCase,
 } from '../../use-case/'
 
 export class CartController {
@@ -44,6 +45,20 @@ export class CartController {
       res.status(200).send(result)
     } else {
       res.status(200).send({ error: true, message: 'Cart can not found' })
+    }
+  }
+
+  async destroy(req: Request, res: Response) {
+    const { id } = req.params
+    const cartRepository = makeCartRepositoryFactory()
+
+    const deleteCartUseCase = new DeleteCartUseCase(cartRepository)
+
+    const result = await deleteCartUseCase.perform(id)
+    if (result) {
+      res.status(200).send({ message: 'Cart success abandoned' })
+    } else {
+      res.status(200).send({ error: true, message: 'Cart can not abandoned' })
     }
   }
 }
