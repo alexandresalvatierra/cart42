@@ -50,7 +50,7 @@ Wait a little bit for all application set up. After all process completed, go to
 
 ### What could come next
 
-There are few important activities to improve this project like: Unit Tests (most important), improve the controller layers, include validations layers, and include another endpoints to cart like: Add Item to Cart (POST /carts/{cart_id}/items), Remove Item from Cart (DELETE /carts/{cart_id}/items/{item_id}), Update Cart Item Quantity (PUT /carts/{cart_id}/items/{item_id}), Checkout Cart (POST /carts/{cart_id}/checkout)
+There are few important activities to improve this project like: Unit Tests (most important), improve the controller layers, include validations layers, manage the items quantity table, and include another endpoints to cart like: Add Item to Cart (POST /carts/{cart_id}/items), Remove Item from Cart (DELETE /carts/{cart_id}/items/{item_id}), Update Cart Item Quantity (PUT /carts/{cart_id}/items/{item_id}), Checkout Cart (POST /carts/{cart_id}/checkout)
 
 ## Author
 
