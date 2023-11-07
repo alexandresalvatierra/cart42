@@ -1,35 +1,49 @@
 import { Request, Response } from 'express'
-/* import { AuthService } from "./auth.service"
-const authService = new AuthService();*/
-import { CartModel } from '../../../database/models/cart.model'
+import { makeCartRepositoryFactory } from '../../infra/factories/cart-repository.factory'
+import {
+  CreateCartUseCase,
+  FindAllCartUseCase,
+  FindOneCartUseCase,
+} from '../../use-case/'
 
 export class CartController {
-  async index(req: Request, res: Response) {
-    res.json('list carts')
+  async create(req: Request, res: Response) {
+    const { items } = req.body
+    const cartRepository = makeCartRepositoryFactory()
+    const createCartUseCase = new CreateCartUseCase(cartRepository)
+
+    const result = await createCartUseCase.perform({
+      items,
+    })
+    if (result) {
+      res.status(201).send(result)
+    } else {
+      res.status(200).send({ error: true, message: 'Cart can not created' })
+    }
   }
 
-  async create(req: Request, res: Response) {
-    //const { name, email, password } = req.body;
+  async index(req: Request, res: Response) {
+    const cartRepository = makeCartRepositoryFactory()
+    const findAllItemUseCase = new FindAllCartUseCase(cartRepository)
 
-    try {
-      const cartModel = await CartModel.create({
-        created_at: new Date(),
-      })
-      res.send(cartModel)
-    } catch (error) {
-      console.log(error)
-      res.status(500).send(error)
+    const result = await findAllItemUseCase.perform()
+    if (result) {
+      res.status(200).send(result)
+    } else {
+      res.status(200).send({ error: true, message: 'Carts can not listed' })
     }
+  }
 
-    /* const cartModel = new CartModel({
-      created_at: new Date()
-    });
+  async show(req: Request, res: Response) {
+    const { id } = req.params
+    const cartRepository = makeCartRepositoryFactory()
+    const findOneCartUseCase = new FindOneCartUseCase(cartRepository)
 
-    try {
-      await cartModel.save();
-      res.send(CartModel);
-    } catch (error) {
-      res.status(500).send(error);
-    } */
+    const result = await findOneCartUseCase.perform(id)
+    if (result) {
+      res.status(200).send(result)
+    } else {
+      res.status(200).send({ error: true, message: 'Cart can not found' })
+    }
   }
 }

@@ -1,4 +1,5 @@
 import { Entity } from '../../../core/domain/entities/entity'
+import { CartItemEntity } from './cart-item.entity'
 
 type CartProps = {
   quantity?: number
@@ -6,8 +7,10 @@ type CartProps = {
   discounts?: number
   taxes?: number
   total?: number
-  abandonedAt: Date
-  createdAt: Date
+  items: CartItemEntity[] | []
+  abandonedAt?: Date
+  createdAt?: Date
+  updatedAt?: Date
 }
 
 export class CartEntity extends Entity<CartProps> {

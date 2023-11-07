@@ -1,20 +1,20 @@
 import mongoose, { Schema } from 'mongoose'
-import crypto from 'crypto'
 
 const CartItemSchema: Schema = new Schema({
-  id: { type: Schema.Types.UUID, unique: true, default: crypto.randomUUID() },
-  itemId: { type: Schema.Types.UUID, required: true, unique: false },
+  itemId: { type: mongoose.Schema.Types.ObjectId, ref: 'Item' },
   quantity: { type: Number, required: true },
   discounts: { type: Number, required: false },
   taxes: { type: Number, required: false },
-  created_at: { type: Date, required: true },
 })
 
+CartItemSchema.set('timestamps', true)
+
 const CartSchema: Schema = new Schema({
-  id: { type: Schema.Types.UUID, unique: true, default: crypto.randomUUID() },
   items: [CartItemSchema],
-  abandoned_at: { type: Date, required: false },
-  created_at: { type: Date, required: true },
+  abandonedAt: { type: Date, required: false },
 })
+
+CartSchema.set('timestamps', true)
+CartSchema.index({ createdAt: -1 }, { unique: true })
 
 export const CartModel = mongoose.model('Cart', CartSchema)
