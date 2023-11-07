@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/app.ts",
+    "dev": "export NODE_ENV=development&& nodemon src/app.ts",
+    "prod": "export NODE_ENV=production&& node --loader ts-node/esm --experimental-specifier-resolution=node src/app.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
   },
