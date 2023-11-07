@@ -4,16 +4,14 @@ import { ItemModel } from '../../../../database/models/item.model'
 
 export class ItemMongoRepository implements ItemRepository {
   async create(itemEntity: ItemEntity): Promise<ItemEntity | false> {
-    const { name, price, quantity, createdAt } = itemEntity.props
+    const { name, price, quantity } = itemEntity.props
     return await ItemModel.create({
       name,
       price,
       quantity,
-      created_at: createdAt,
-      updated_at: createdAt,
     })
       .then((item) => {
-        const { id, name, price, quantity, created_at: createdAt } = item
+        const { id, name, price, quantity, createdAt } = item
 
         return ItemEntity.create({ name, price, quantity, createdAt }, id)
       })
@@ -29,7 +27,6 @@ export class ItemMongoRepository implements ItemRepository {
               name: item.name,
               price: item.price,
               quantity: item.quantity,
-              createdAt: item.created_at,
             },
             item.id,
           ),
@@ -48,7 +45,6 @@ export class ItemMongoRepository implements ItemRepository {
             name: item!.name,
             price: item!.price,
             quantity: item!.quantity,
-            createdAt: item!.created_at,
           },
           item!.id,
         ),
@@ -60,20 +56,22 @@ export class ItemMongoRepository implements ItemRepository {
     itemEntity: ItemEntity,
     id: string,
   ): Promise<ItemEntity | false> {
-    const { name, price, quantity, updatedAt } = itemEntity.props
+    const { name, price, quantity } = itemEntity.props
     return await ItemModel.findByIdAndUpdate(
       { _id: id },
       {
         name,
         price,
         quantity,
-        updated_at: updatedAt,
       },
       { upsert: false },
     )
       .then((item) =>
         item
-          ? ItemEntity.create({ name, price, quantity, updatedAt }, id)
+          ? ItemEntity.create(
+              { name, price, quantity, updatedAt: item.updatedAt },
+              id,
+            )
           : false,
       )
       .catch(() => false)

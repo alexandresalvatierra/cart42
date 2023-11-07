@@ -24,13 +24,11 @@ export class UpdateItemUseCase implements UseCase {
     request: UpdateItemRequest,
   ): Promise<UpdateItemResponse | false> {
     const { id, name, price, quantity } = request
-    const updatedAt = new Date()
     const itemEntity = ItemEntity.create(
       {
         name,
         price,
         quantity,
-        updatedAt,
       },
       id,
     )

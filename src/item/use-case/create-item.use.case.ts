@@ -23,12 +23,10 @@ export class CreateItemUseCase implements UseCase {
     request: CreateItemRequest,
   ): Promise<CreateItemResponse | false> {
     const { name, price, quantity } = request
-    const createdAt = new Date()
     const itemEntity = ItemEntity.create({
       name,
       price,
       quantity,
-      createdAt,
     })
     const itemEntityCreated = await this.itemRepository.create(itemEntity)
     if (itemEntityCreated) {

@@ -1,10 +1,12 @@
 import { Request, Response } from 'express'
 import { makeItemRepositoryFactory } from '../../infra/factories/item-repository.factory'
-import { CreateItemUseCase } from '../../use-case/create-item.use.case'
-import { FindAllItemUseCase } from '../../use-case/find-all-item.use.case'
-import { FindOneItemUseCase } from '../../use-case/find-one-item.use.case'
-import { UpdateItemUseCase } from '../../use-case/update-item.use.case'
-import { DeleteItemUseCase } from '../../use-case/delete-item.use.case'
+import {
+  CreateItemUseCase,
+  FindAllItemUseCase,
+  FindOneItemUseCase,
+  UpdateItemUseCase,
+  DeleteItemUseCase,
+} from '../../use-case/'
 
 export class ItemController {
   async create(req: Request, res: Response) {
