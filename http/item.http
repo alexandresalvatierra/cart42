@@ -3,7 +3,7 @@ POST http://localhost:4242/items
 content-type: application/json
 
 {
-    "name": "Star Wars 1",
+    "name": "The Hitchhiker's Guide to the Galaxy",
     "price": 40,
     "quantity": 100
 }
@@ -12,17 +12,17 @@ content-type: application/json
 GET http://localhost:4242/items
 
 ### Find One
-GET http://localhost:4242/items/65487a79b51a966fdecb909c
+GET http://localhost:4242/items/654aa60b6da11f99fae7dd12
 
 ### Update
-PUT http://localhost:4242/items/65487a79b51a966fdecb909c
+PUT http://localhost:4242/items/654aa60b6da11f99fae7dd12
 content-type: application/json
 
 {
-    "name": "Star Wars 1",
-    "price": 40,
-    "quantity": 70
+    "name": "The Hitchhiker's Guide to the Galaxy",
+    "price": 42,
+    "quantity": 42
 }
 
 ### DELETE
-DELETE http://localhost:4242/items/65487a79b51a966fdecb909c
+DELETE http://localhost:4242/items/6549649c9609d5b95b5b3579

@@ -1,6 +1,6 @@
 import { ItemEntity } from '../../../domain/entities/item.entity'
 import { ItemRepository } from '../../../domain/repositories/item.repository'
-import { ItemModel } from '../../../../database/models/item.model'
+import { ItemModel } from '../../models/mongo/item.model'
 
 export class ItemMongoRepository implements ItemRepository {
   async create(itemEntity: ItemEntity): Promise<ItemEntity | false> {
