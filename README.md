@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> A simple Cart shopping, using Node with Typescript, MongoDB and Docker. I hope you have as much fun as I was doing this job.
+> A simple Cart shopping, using Node with Typescript, MongoDB and Docker. Published on AWS EC2 using Github Actions for CI/CD. I hope you have as much fun as I was doing in this journey.
 
 ## Docs
 
@@ -25,6 +25,8 @@ cd book42
 ```
 
 ## How to Run
+
+Please, rename the .env.development.example to .env.development and setting the environment vars if you want. And them run on terminal.
 
 ```sh
 docker compose up
@@ -46,11 +48,23 @@ Wait a little bit for all application set up. After all process completed, go to
     - Add cart: POST http://localhost:4242/carts
     - Find all items: GET http://localhost:4242/carts
     - Find one item: GET http://localhost:4242/carts/(_id_)
-    - Abandon (soft dele) one item: DELETE http://localhost:4242/carts/(_id_)
+    - Abandon (soft delete) one item: DELETE http://localhost:4242/carts/(_id_)
 
 ### What could come next
 
-There are few important activities to improve this project like: Unit Tests (most important), improve the controller layers, include validations layers, manage the items quantity table, and include another endpoints to cart like: Add Item to Cart (POST /carts/{cart_id}/items), Remove Item from Cart (DELETE /carts/{cart_id}/items/{item_id}), Update Cart Item Quantity (PUT /carts/{cart_id}/items/{item_id}), Checkout Cart (POST /carts/{cart_id}/checkout)
+There are few important activities to improve this project like:
+
+- [ ] Unit Tests (most important)
+- [ ] Improve the controller layers
+- [ ] Include validations layers
+- [ ] Manage items inventory table
+- [ ] Include another endpoints to cart like:
+  - Add Item to Cart (POST /carts/{cart_id}/items)
+  - Remove Item from Cart (DELETE /carts/{cart_id}/items/{item_id})
+  - Update Cart Item Quantity (PUT /carts/{cart_id}/items/{item_id})
+  - Checkout Cart (POST /carts/{cart_id}/checkout)
+- [ ] Event driven between modules. Ex: When creating the shopping cart, it is necessary to send the price of the items. To automatically retrieve the price when creating the cart, to avoid sending the price, it would be necessary to create the service layer to send events between the item and cart modules, to avoid coupling between the modules
+- [ ] Consider using Serverless, especially Lambda
 
 ## Author
 
