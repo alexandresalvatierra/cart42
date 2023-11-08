@@ -8,7 +8,7 @@ dotenv.config({
 export const environment = {
   MODE_ENV: process.env.NODE_ENV || 'development',
   APP_HOST: process.env.APP_HOST || 'localhost',
-  APP_PORT: process.env.APP_PORT || '27017',
+  APP_PORT: process.env.APP_PORT || '4242',
   DB_HOST: process.env.DB_HOST || 'localhost',
   DB_PORT: process.env.DB_PORT || '27017',
   DB_NAME: process.env.DB_NAME || 'cart42',
