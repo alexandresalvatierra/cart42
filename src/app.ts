@@ -6,7 +6,7 @@ const app = express()
 const port = environment.APP_PORT
 
 app.use(express.json())
-app.use('/', modules)
+app.use('/api/', modules)
 
 db.then(() => {
   app.listen(port, () => {
