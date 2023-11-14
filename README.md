@@ -36,7 +36,7 @@ Wait a little bit for all application set up. After all process completed, go to
 
 ## Endpoints
 
-- Mongo Express: localhost:8081
+- Mongo Express: http://localhost:8081
 - Node App: http://localhost:4242
   - **Item** [http file](http/item.http)
     - Add item: POST http://localhost:4242/items
@@ -48,7 +48,7 @@ Wait a little bit for all application set up. After all process completed, go to
     - Add cart: POST http://localhost:4242/carts
     - Find all items: GET http://localhost:4242/carts
     - Find one item: GET http://localhost:4242/carts/(_id_)
-    - Abandon (soft delete) one item: DELETE http://localhost:4242/carts/(_id_)
+    - Abandon (soft delete) cart: DELETE http://localhost:4242/carts/(_id_)
 
 ### What could come next
 
